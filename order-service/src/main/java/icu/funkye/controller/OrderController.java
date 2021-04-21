@@ -24,7 +24,7 @@ public class OrderController {
     IOrdersService ordersService;
 
     @RequestMapping("/save")
-    @GlobalTransactional(lockRetryInternal = 10,lockRetryTimes = 30)
+//    @GlobalTransactional(lockRetryInternal = 10,lockRetryTimes = 30)
     public Boolean save(@RequestBody Orders orders) {
         return ordersService.save(orders);
     }

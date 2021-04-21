@@ -7,15 +7,6 @@ spring:
       loadbalancer:
          retry:
             enabled: false
-      nacos:
-         discovery:
-            server-addr: 127.0.0.1:8848
-            username: "nacos"
-            password: "nacos"
-         config:
-            server-addr: 127.0.0.1:8848
-            username: "nacos"
-            password: "nacos"
 server:
    port: 8081
 ribbon:
@@ -24,4 +15,12 @@ ribbon:
    OkToRetryOnAllOperations: false
 feign:
    sentinel:
-      enabled: true
+      enabled: false
+
+eureka:
+   client:
+      service-url:
+         defaultZone: http://192.168.202.137:8761/eureka/
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.cloud.client.ip-address}:${server.port}

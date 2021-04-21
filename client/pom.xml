@@ -24,22 +24,28 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!-- nacos 作为服务注册中心 -->
+<!--        &lt;!&ndash; nacos 作为服务注册中心 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; nacos 作为配置中心 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+<!--        </dependency>-->
+        <!-- 客户端依赖 -->
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <!-- nacos 作为配置中心 -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.seata</groupId>
+            <groupId>com.dxy.middleware</groupId>
             <artifactId>seata-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
@@ -58,5 +64,17 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

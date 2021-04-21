@@ -32,11 +32,35 @@ public class TestController {
     private IProductService productService;
 
     /**
-     * 秒杀下单分布式事务测试提交
+     * 分布式事物-秒杀下单分布式事务测试提交
      */
-    @GetMapping(value = "testCommit")
+    @GetMapping(value = "/seata/testCommit")
     @GlobalTransactional
-    public Object testCommit(@RequestParam(name = "id",defaultValue = "1") Integer id,
+    public Object seataTestCommit(@RequestParam(name = "id",defaultValue = "1") Integer id,
+        @RequestParam(name = "sum", defaultValue = "1") Integer sum) {
+        Boolean ok = productService.reduceStock(id, sum);
+        if (ok) {
+            LocalDateTime now = LocalDateTime.now();
+            Orders orders = new Orders();
+            orders.setCreateTime(now);
+            orders.setProductId(id);
+            orders.setReplaceTime(now);
+            orders.setSum(sum);
+            orderService.save(orders);
+            return "ok";
+        } else {
+            return "fail";
+        }
+    }
+
+    /**
+     * 无分布式事物
+     * @param id
+     * @param sum
+     * @return
+     */
+    @GetMapping(value = "/normal/testCommit")
+    public Object normalTestCommit(@RequestParam(name = "id",defaultValue = "1") Integer id,
         @RequestParam(name = "sum", defaultValue = "1") Integer sum) {
         Boolean ok = productService.reduceStock(id, sum);
         if (ok) {
