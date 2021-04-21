@@ -12,14 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
 
     @Override
-    @Transactional
+//    @Transactional
     public Boolean reduceStock(Integer id, Integer sum) {
         return update(Wrappers.<Product>lambdaUpdate().eq(Product::getId, id).ge(Product::getStock, 1)
             .setSql("stock=stock-" + sum));
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public Object addStock(Integer id, Integer sum) {
         Product product = getOne(Wrappers.<Product>query().eq("id", id).last("for update"));
         product.setStock(product.getStock() + sum);

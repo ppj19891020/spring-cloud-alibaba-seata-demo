@@ -35,7 +35,7 @@ public class TestController {
      * 分布式事物-秒杀下单分布式事务测试提交
      */
     @GetMapping(value = "/seata/testCommit")
-    @GlobalTransactional
+    @GlobalTransactional(lockRetryInternal = 20,lockRetryTimes = 60)
     public Object seataTestCommit(@RequestParam(name = "id",defaultValue = "1") Integer id,
         @RequestParam(name = "sum", defaultValue = "1") Integer sum) {
         Boolean ok = productService.reduceStock(id, sum);
